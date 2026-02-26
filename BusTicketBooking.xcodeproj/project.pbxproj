@@ -14,6 +14,15 @@
 		223C6CEB2F50405B00BCC29D /* BusTicketBookingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6CEA2F50405B00BCC29D /* BusTicketBookingTests.swift */; };
 		223C6CF52F50405B00BCC29D /* BusTicketBookingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6CF42F50405B00BCC29D /* BusTicketBookingUITests.swift */; };
 		223C6CF72F50405B00BCC29D /* BusTicketBookingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6CF62F50405B00BCC29D /* BusTicketBookingUITestsLaunchTests.swift */; };
+		223C6D042F5040E400BCC29D /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6D032F5040E400BCC29D /* MainTabView.swift */; };
+		223C6D072F50410A00BCC29D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6D062F50410A00BCC29D /* HomeView.swift */; };
+		223C6D092F50411B00BCC29D /* OffersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6D082F50411B00BCC29D /* OffersView.swift */; };
+		223C6D0B2F50413700BCC29D /* TicketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6D0A2F50413700BCC29D /* TicketsView.swift */; };
+		223C6D0D2F50414400BCC29D /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6D0C2F50414400BCC29D /* MoreView.swift */; };
+		223C6D102F5042AF00BCC29D /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6D0F2F5042AF00BCC29D /* BannerView.swift */; };
+		223C6D122F5042C700BCC29D /* RouteCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6D112F5042C700BCC29D /* RouteCardView.swift */; };
+		223C6D142F5042D400BCC29D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6D132F5042D400BCC29D /* Theme.swift */; };
+		223C6D172F5042F000BCC29D /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6D162F5042F000BCC29D /* Route.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +54,15 @@
 		223C6CF02F50405B00BCC29D /* BusTicketBookingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusTicketBookingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		223C6CF42F50405B00BCC29D /* BusTicketBookingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusTicketBookingUITests.swift; sourceTree = "<group>"; };
 		223C6CF62F50405B00BCC29D /* BusTicketBookingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusTicketBookingUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		223C6D032F5040E400BCC29D /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		223C6D062F50410A00BCC29D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		223C6D082F50411B00BCC29D /* OffersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersView.swift; sourceTree = "<group>"; };
+		223C6D0A2F50413700BCC29D /* TicketsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsView.swift; sourceTree = "<group>"; };
+		223C6D0C2F50414400BCC29D /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
+		223C6D0F2F5042AF00BCC29D /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		223C6D112F5042C700BCC29D /* RouteCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteCardView.swift; sourceTree = "<group>"; };
+		223C6D132F5042D400BCC29D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		223C6D162F5042F000BCC29D /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,11 +113,15 @@
 		223C6CD72F50405900BCC29D /* BusTicketBooking */ = {
 			isa = PBXGroup;
 			children = (
+				223C6D152F5042E100BCC29D /* Models */,
+				223C6D0E2F50414D00BCC29D /* Components */,
+				223C6D052F5040F000BCC29D /* Views */,
 				223C6CD82F50405900BCC29D /* BusTicketBookingApp.swift */,
 				223C6CDA2F50405900BCC29D /* ContentView.swift */,
 				223C6CDC2F50405A00BCC29D /* Assets.xcassets */,
 				223C6CDE2F50405A00BCC29D /* BusTicketBooking.entitlements */,
 				223C6CDF2F50405A00BCC29D /* Preview Content */,
+				223C6D032F5040E400BCC29D /* MainTabView.swift */,
 			);
 			path = BusTicketBooking;
 			sourceTree = "<group>";
@@ -127,6 +149,35 @@
 				223C6CF62F50405B00BCC29D /* BusTicketBookingUITestsLaunchTests.swift */,
 			);
 			path = BusTicketBookingUITests;
+			sourceTree = "<group>";
+		};
+		223C6D052F5040F000BCC29D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				223C6D062F50410A00BCC29D /* HomeView.swift */,
+				223C6D082F50411B00BCC29D /* OffersView.swift */,
+				223C6D0A2F50413700BCC29D /* TicketsView.swift */,
+				223C6D0C2F50414400BCC29D /* MoreView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		223C6D0E2F50414D00BCC29D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				223C6D0F2F5042AF00BCC29D /* BannerView.swift */,
+				223C6D112F5042C700BCC29D /* RouteCardView.swift */,
+				223C6D132F5042D400BCC29D /* Theme.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		223C6D152F5042E100BCC29D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				223C6D162F5042F000BCC29D /* Route.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +310,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				223C6D0D2F50414400BCC29D /* MoreView.swift in Sources */,
+				223C6D0B2F50413700BCC29D /* TicketsView.swift in Sources */,
+				223C6D172F5042F000BCC29D /* Route.swift in Sources */,
+				223C6D092F50411B00BCC29D /* OffersView.swift in Sources */,
 				223C6CDB2F50405900BCC29D /* ContentView.swift in Sources */,
+				223C6D102F5042AF00BCC29D /* BannerView.swift in Sources */,
+				223C6D072F50410A00BCC29D /* HomeView.swift in Sources */,
+				223C6D122F5042C700BCC29D /* RouteCardView.swift in Sources */,
+				223C6D142F5042D400BCC29D /* Theme.swift in Sources */,
 				223C6CD92F50405900BCC29D /* BusTicketBookingApp.swift in Sources */,
+				223C6D042F5040E400BCC29D /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
