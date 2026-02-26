@@ -1,0 +1,609 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		223C6CD92F50405900BCC29D /* BusTicketBookingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6CD82F50405900BCC29D /* BusTicketBookingApp.swift */; };
+		223C6CDB2F50405900BCC29D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6CDA2F50405900BCC29D /* ContentView.swift */; };
+		223C6CDD2F50405A00BCC29D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223C6CDC2F50405A00BCC29D /* Assets.xcassets */; };
+		223C6CE12F50405A00BCC29D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223C6CE02F50405A00BCC29D /* Preview Assets.xcassets */; };
+		223C6CEB2F50405B00BCC29D /* BusTicketBookingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6CEA2F50405B00BCC29D /* BusTicketBookingTests.swift */; };
+		223C6CF52F50405B00BCC29D /* BusTicketBookingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6CF42F50405B00BCC29D /* BusTicketBookingUITests.swift */; };
+		223C6CF72F50405B00BCC29D /* BusTicketBookingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C6CF62F50405B00BCC29D /* BusTicketBookingUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		223C6CE72F50405B00BCC29D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 223C6CCD2F50405900BCC29D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 223C6CD42F50405900BCC29D;
+			remoteInfo = BusTicketBooking;
+		};
+		223C6CF12F50405B00BCC29D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 223C6CCD2F50405900BCC29D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 223C6CD42F50405900BCC29D;
+			remoteInfo = BusTicketBooking;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		223C6CD52F50405900BCC29D /* BusTicketBooking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusTicketBooking.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		223C6CD82F50405900BCC29D /* BusTicketBookingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusTicketBookingApp.swift; sourceTree = "<group>"; };
+		223C6CDA2F50405900BCC29D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		223C6CDC2F50405A00BCC29D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		223C6CDE2F50405A00BCC29D /* BusTicketBooking.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BusTicketBooking.entitlements; sourceTree = "<group>"; };
+		223C6CE02F50405A00BCC29D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		223C6CE62F50405B00BCC29D /* BusTicketBookingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusTicketBookingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		223C6CEA2F50405B00BCC29D /* BusTicketBookingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusTicketBookingTests.swift; sourceTree = "<group>"; };
+		223C6CF02F50405B00BCC29D /* BusTicketBookingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusTicketBookingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		223C6CF42F50405B00BCC29D /* BusTicketBookingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusTicketBookingUITests.swift; sourceTree = "<group>"; };
+		223C6CF62F50405B00BCC29D /* BusTicketBookingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusTicketBookingUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		223C6CD22F50405900BCC29D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		223C6CE32F50405B00BCC29D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		223C6CED2F50405B00BCC29D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		223C6CCC2F50405900BCC29D = {
+			isa = PBXGroup;
+			children = (
+				223C6CD72F50405900BCC29D /* BusTicketBooking */,
+				223C6CE92F50405B00BCC29D /* BusTicketBookingTests */,
+				223C6CF32F50405B00BCC29D /* BusTicketBookingUITests */,
+				223C6CD62F50405900BCC29D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		223C6CD62F50405900BCC29D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				223C6CD52F50405900BCC29D /* BusTicketBooking.app */,
+				223C6CE62F50405B00BCC29D /* BusTicketBookingTests.xctest */,
+				223C6CF02F50405B00BCC29D /* BusTicketBookingUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		223C6CD72F50405900BCC29D /* BusTicketBooking */ = {
+			isa = PBXGroup;
+			children = (
+				223C6CD82F50405900BCC29D /* BusTicketBookingApp.swift */,
+				223C6CDA2F50405900BCC29D /* ContentView.swift */,
+				223C6CDC2F50405A00BCC29D /* Assets.xcassets */,
+				223C6CDE2F50405A00BCC29D /* BusTicketBooking.entitlements */,
+				223C6CDF2F50405A00BCC29D /* Preview Content */,
+			);
+			path = BusTicketBooking;
+			sourceTree = "<group>";
+		};
+		223C6CDF2F50405A00BCC29D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				223C6CE02F50405A00BCC29D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		223C6CE92F50405B00BCC29D /* BusTicketBookingTests */ = {
+			isa = PBXGroup;
+			children = (
+				223C6CEA2F50405B00BCC29D /* BusTicketBookingTests.swift */,
+			);
+			path = BusTicketBookingTests;
+			sourceTree = "<group>";
+		};
+		223C6CF32F50405B00BCC29D /* BusTicketBookingUITests */ = {
+			isa = PBXGroup;
+			children = (
+				223C6CF42F50405B00BCC29D /* BusTicketBookingUITests.swift */,
+				223C6CF62F50405B00BCC29D /* BusTicketBookingUITestsLaunchTests.swift */,
+			);
+			path = BusTicketBookingUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		223C6CD42F50405900BCC29D /* BusTicketBooking */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 223C6CFA2F50405B00BCC29D /* Build configuration list for PBXNativeTarget "BusTicketBooking" */;
+			buildPhases = (
+				223C6CD12F50405900BCC29D /* Sources */,
+				223C6CD22F50405900BCC29D /* Frameworks */,
+				223C6CD32F50405900BCC29D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BusTicketBooking;
+			productName = BusTicketBooking;
+			productReference = 223C6CD52F50405900BCC29D /* BusTicketBooking.app */;
+			productType = "com.apple.product-type.application";
+		};
+		223C6CE52F50405B00BCC29D /* BusTicketBookingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 223C6CFD2F50405B00BCC29D /* Build configuration list for PBXNativeTarget "BusTicketBookingTests" */;
+			buildPhases = (
+				223C6CE22F50405B00BCC29D /* Sources */,
+				223C6CE32F50405B00BCC29D /* Frameworks */,
+				223C6CE42F50405B00BCC29D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				223C6CE82F50405B00BCC29D /* PBXTargetDependency */,
+			);
+			name = BusTicketBookingTests;
+			productName = BusTicketBookingTests;
+			productReference = 223C6CE62F50405B00BCC29D /* BusTicketBookingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		223C6CEF2F50405B00BCC29D /* BusTicketBookingUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 223C6D002F50405B00BCC29D /* Build configuration list for PBXNativeTarget "BusTicketBookingUITests" */;
+			buildPhases = (
+				223C6CEC2F50405B00BCC29D /* Sources */,
+				223C6CED2F50405B00BCC29D /* Frameworks */,
+				223C6CEE2F50405B00BCC29D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				223C6CF22F50405B00BCC29D /* PBXTargetDependency */,
+			);
+			name = BusTicketBookingUITests;
+			productName = BusTicketBookingUITests;
+			productReference = 223C6CF02F50405B00BCC29D /* BusTicketBookingUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		223C6CCD2F50405900BCC29D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1410;
+				LastUpgradeCheck = 1410;
+				TargetAttributes = {
+					223C6CD42F50405900BCC29D = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					223C6CE52F50405B00BCC29D = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 223C6CD42F50405900BCC29D;
+					};
+					223C6CEF2F50405B00BCC29D = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 223C6CD42F50405900BCC29D;
+					};
+				};
+			};
+			buildConfigurationList = 223C6CD02F50405900BCC29D /* Build configuration list for PBXProject "BusTicketBooking" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 223C6CCC2F50405900BCC29D;
+			productRefGroup = 223C6CD62F50405900BCC29D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				223C6CD42F50405900BCC29D /* BusTicketBooking */,
+				223C6CE52F50405B00BCC29D /* BusTicketBookingTests */,
+				223C6CEF2F50405B00BCC29D /* BusTicketBookingUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		223C6CD32F50405900BCC29D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				223C6CE12F50405A00BCC29D /* Preview Assets.xcassets in Resources */,
+				223C6CDD2F50405A00BCC29D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		223C6CE42F50405B00BCC29D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		223C6CEE2F50405B00BCC29D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		223C6CD12F50405900BCC29D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				223C6CDB2F50405900BCC29D /* ContentView.swift in Sources */,
+				223C6CD92F50405900BCC29D /* BusTicketBookingApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		223C6CE22F50405B00BCC29D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				223C6CEB2F50405B00BCC29D /* BusTicketBookingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		223C6CEC2F50405B00BCC29D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				223C6CF52F50405B00BCC29D /* BusTicketBookingUITests.swift in Sources */,
+				223C6CF72F50405B00BCC29D /* BusTicketBookingUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		223C6CE82F50405B00BCC29D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 223C6CD42F50405900BCC29D /* BusTicketBooking */;
+			targetProxy = 223C6CE72F50405B00BCC29D /* PBXContainerItemProxy */;
+		};
+		223C6CF22F50405B00BCC29D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 223C6CD42F50405900BCC29D /* BusTicketBooking */;
+			targetProxy = 223C6CF12F50405B00BCC29D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		223C6CF82F50405B00BCC29D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		223C6CF92F50405B00BCC29D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		223C6CFB2F50405B00BCC29D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BusTicketBooking/BusTicketBooking.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BusTicketBooking/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ios.BusTicketBooking;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		223C6CFC2F50405B00BCC29D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BusTicketBooking/BusTicketBooking.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BusTicketBooking/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ios.BusTicketBooking;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		223C6CFE2F50405B00BCC29D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ios.BusTicketBookingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BusTicketBooking.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BusTicketBooking";
+			};
+			name = Debug;
+		};
+		223C6CFF2F50405B00BCC29D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ios.BusTicketBookingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BusTicketBooking.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BusTicketBooking";
+			};
+			name = Release;
+		};
+		223C6D012F50405B00BCC29D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ios.BusTicketBookingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BusTicketBooking;
+			};
+			name = Debug;
+		};
+		223C6D022F50405B00BCC29D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ios.BusTicketBookingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BusTicketBooking;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		223C6CD02F50405900BCC29D /* Build configuration list for PBXProject "BusTicketBooking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				223C6CF82F50405B00BCC29D /* Debug */,
+				223C6CF92F50405B00BCC29D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		223C6CFA2F50405B00BCC29D /* Build configuration list for PBXNativeTarget "BusTicketBooking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				223C6CFB2F50405B00BCC29D /* Debug */,
+				223C6CFC2F50405B00BCC29D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		223C6CFD2F50405B00BCC29D /* Build configuration list for PBXNativeTarget "BusTicketBookingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				223C6CFE2F50405B00BCC29D /* Debug */,
+				223C6CFF2F50405B00BCC29D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		223C6D002F50405B00BCC29D /* Build configuration list for PBXNativeTarget "BusTicketBookingUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				223C6D012F50405B00BCC29D /* Debug */,
+				223C6D022F50405B00BCC29D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 223C6CCD2F50405900BCC29D /* Project object */;
+}
