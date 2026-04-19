@@ -1,409 +1,492 @@
 # Bus Ticket Booking App
 
-## 1) Project Overview
+Role-based iOS bus ticket booking application built with SwiftUI, Firebase Authentication, and Cloud Firestore.
 
-**Name:** Bus Ticket Booking App  
-**Platform:** iOS (SwiftUI)  
-**Architecture:** MVVM  
-**Backend:** Firebase Authentication + Cloud Firestore  
-**Primary Domain:** Bus ticket search, booking, seat management, and admin fleet/ticket operations
+## Overview
 
-This project is a role-based bus ticket booking application with two experiences:
+- Platform: iOS (SwiftUI)
+- Pattern: MVVM (requested as MVVC in prompt; implemented as MVVM in code)
+- Backend: Firebase Authentication + Firestore
+- Key domains: route discovery, seat booking, ticket lifecycle, offers, admin oversight, operator fleet/revenue operations
+- Entry flow: Splash -> Auth gate -> User tabs or Admin tabs or Operator tabs
 
-- **User app flow:** Search routes, view buses, select seats, confirm booking, download/share PDF tickets, view/cancel bookings, manage profile and notification preferences.
-- **Admin flow:** View dashboard stats, add/manage buses, monitor sold tickets, and manage admin profile.
+## Architecture
 
-## 2) Core Capabilities
+```mermaid
+flowchart TD
+		A[BusTicketBookingApp] --> B[ContentView]
+		B --> C[AuthViewModel]
+		B --> D{Auth + Role}
+		D -->|No Session| E[SignIn/SignUp]
+		D -->|User| F[MainTabView]
+		D -->|Admin| G[AdminDashboardView]
+		D -->|Operator| O[OperatorDashboardView]
 
-### User-facing
-
-- Email/password authentication with email verification
-- Route search by source and destination
-- Bus list and trip detail screens
-- Seat selection on a 40-seat matrix (A1 to J4)
-- Discount-aware pricing and dedicated offers tab
-- Booking confirmation and Firestore persistence
-- Ticket PDF generation and sharing
-- My tickets view with booking cancellation
-- Profile editing and notification preference controls
-- Light/dark mode toggle via local storage
-
-### Admin-facing
-
-- Role-gated dashboard
-- Bus creation with route, time, pricing, discount, and stop points
-- Bus list management with delete support
-- Sold ticket monitoring with joined user + trip details
-- Dashboard summary cards (buses, users, bookings, routes)
-
-## 3) Technical Stack
-
-- **Language:** Swift
-- **UI:** SwiftUI
-- **State management:** `ObservableObject`, `@Published`, `@StateObject`, `@EnvironmentObject`
-- **Concurrency:** Swift concurrency + `@MainActor`
-- **Auth:** FirebaseAuth
-- **Database:** FirebaseFirestore
-- **Document generation:** `UIGraphicsPDFRenderer`, SwiftUI-to-image rendering
-- **External API:** Bangladesh district endpoints in `DistrictService`
-
-## 4) High-Level Architecture
-
-```text
-BusTicketBookingApp (entry)
-	-> ContentView
-			-> SplashScreenView
-			-> SignInView / SignUpView (unauthenticated)
-			-> MainTabView (user)
-			-> AdminDashboardView (admin)
-
-Data Layer: Models/
-Business Layer: ViewModels/
-UI Layer: Views/ + Components/
-Utility Layer: Utilities/
+		F --> H[Views + Components]
+		G --> H
+		O --> H
+		H --> I[ViewModels]
+		I --> J[Models]
+		I --> K[Utilities]
+		I --> L[(Firestore)]
+		C --> M[(FirebaseAuth)]
+		K --> N[District REST API]
 ```
 
-### App boot flow
+### Layer responsibilities
 
-1. `BusTicketBookingApp` configures Firebase.
-2. `ContentView` creates `AuthViewModel` and applies dark/light scheme.
-3. Splash screen displays for ~2.5 seconds.
-4. Auth state decides target UI:
-	 - Unauthenticated -> `SignInView`
-	 - Authenticated + admin -> `AdminDashboardView`
-	 - Authenticated + non-admin -> `MainTabView`
+- Views/Components: Render UI and bind state.
+- ViewModels: Business logic, validation, network/database orchestration.
+- Models: Domain data structures and decoding.
+- Utilities: PDF generation and district API integration.
+- Firebase: Auth state + persistent cloud data.
 
-## 5) Data Model Summary
+## Workflow Of App
 
-- **`UserProfile` / `NotificationPreferences`:** User identity, contact fields, role, toggles.
-- **`BusTrip`:** Bus metadata, source/destination, schedule, ticket price, discount, bus type, 40-seat matrix, pickup/drop points.
-- **`Booking` / `BookingConfirmation`:** Booked seats, totals, trip linkage, status and dates.
-- **`Route`:** Aggregated route with minimum price.
-- **`District` / API wrappers:** District mapping from external endpoint.
-- **`SeatHelper`:** Index/label mapping and seat-matrix utilities.
+```mermaid
+flowchart LR
+		A[Launch App] --> B[Splash Screen]
+		B --> C{Authenticated?}
+		C -->|No| D[Sign In / Sign Up]
+		C -->|Yes| E{Role}
+		E -->|User| F[User Main Tabs]
+		E -->|Admin| G[Admin Dashboard Tabs]
+		E -->|Operator| R[Operator Dashboard Tabs]
 
-## 6) Firestore Collections and Stored Data
+		F --> H[Search Route]
+		H --> H1[District API Autocomplete]
+		H1 --> H2[Firestore Route Query]
+		H2 --> I[Bus List]
+		I --> J[Seat Selection]
+		J --> K[Booking Confirmation]
+		K --> L[Firestore Batch Save]
+		L --> M[Generate PDF + Share]
+		M --> N[Tickets History]
+		F --> OFR[Offers Screen]
+		OFR --> OFR2[Discount-Based Ranked Trips]
 
-### `users`
+		G --> O[Add / Manage Buses]
+		G --> P[Sold Tickets]
+		G --> Q[Admin Profile]
+		G --> OPX[Create Operator Accounts]
 
-- `fullName`, `email`, `phone`, `contactNo`, `address`
-- `role` (`user` / `admin`)
-- `notificationPreferences` object
-- `createdAt`, `updatedAt`
+		R --> R1[Add Bus To Fleet]
+		R --> R2[Manage Own Buses]
+		R --> R3[Revenue Analytics]
+```
 
-### `busTrips`
+## Role Based Work
 
-- `busName`, `source`, `destination`
-- `departureTime`, `arrivalTime`
-- `ticketPrice`, `discount`
-- `availableSeats`, `seatMatrix` (40-char binary string)
-- `busType`, `pickupPoints`, `droppingPoints`
+### User role
 
-### `bookings`
+- Register/login with email/password.
+- Verify email before normal login.
+- Search buses by source and destination.
+- Select seats from live seat matrix.
+- Confirm booking and persist ticket.
+- Download/share PDF ticket.
+- View tickets and cancel ticket.
+- Edit profile and notification preferences.
 
-- `userId`, `busTripId`
-- `seatIndices`, `seatLabels`
-- `totalPrice`
-- `bookingDate`, `travelDate`
-- `status` (`confirmed` / `cancelled`)
+### Admin role
 
-## 7) Booking and Seat Logic
+- Access admin-only dashboard tabs.
+- Add new bus trips with route, pricing, stops.
+- Manage bus inventory (view/delete).
+- View sold tickets with passenger + trip details.
+- Monitor top-level statistics (buses, users, bookings, routes).
+- Create operator accounts and monitor operator performance.
 
-- Seat map is represented as a binary string of length 40:
-	- `0` = available
-	- `1` = booked
-- Logical seat grid: 10 rows x 4 columns, labels `A1`...`J4`
-- Booking commit uses Firestore batch write:
-	1. Update `busTrips.seatMatrix` and `availableSeats`
-	2. Create booking document in `bookings`
-	3. Commit atomically
+### Operator role
 
-## 8) Ticket PDF Workflow
+- Sign in using operator account created by admin.
+- Add buses and automatically tag them with operator ownership.
+- Manage only operator-owned buses.
+- View operator dashboard overview.
+- Monitor revenue, daily breakdown, bus-wise revenue, and recent transactions.
 
-`TicketPDFGenerator.generatePDF(...)` creates a 2-page PDF:
+## Access Matrix For Roles
 
-1. **Page 1:** Ticket details (booking id, route, bus, passenger, seats, booking date, total).
-2. **Page 2:** Seat layout visualization using `SeatLayoutPDFView`.
+| Feature | User | Admin | Operator |
+|---|---|---|---|
+| Sign in / sign up | Yes | Yes | Sign in only |
+| Email verification flow | Required | Not required | Not required |
+| Search route and buses | Yes | Optional | Optional |
+| Offers browsing | Yes | Optional | Optional |
+| Seat selection and booking | Yes | Optional | Optional |
+| Download/share ticket PDF | Yes | Optional | Optional |
+| View/cancel own tickets | Yes | Optional | Optional |
+| Edit profile | Yes | Yes | Yes |
+| Notification preferences | Yes | No | Yes |
+| Admin dashboard | No | Yes | No |
+| Create operator accounts | No | Yes | No |
+| Add bus | No | Yes | Yes |
+| Manage buses | No | Yes (all) | Yes (own fleet only) |
+| Revenue analytics | No | Yes (global) | Yes (own fleet only) |
+| View sold tickets | No | Yes | No |
 
-Output is saved to temporary storage and exposed for sharing via `ShareSheet`.
+## Core Functionality
 
-## 9) External Services and Integration Points
+- Authentication and profile lifecycle with Firestore-backed user document.
+- API-assisted route input and Firestore-backed route search.
+- Seat matrix booking model (`40` seats, binary matrix string).
+- Atomic booking write using Firestore batch operation.
+- Booking cancellation flow with seat release.
+- Offer listing for discounted trips with best-discount-first ranking.
+- PDF ticket generation (details page + seat layout page).
+- In-app notification scheduling after successful booking confirmation.
+- Operator account creation, operator-scoped fleet management, and revenue analytics.
 
-- **FirebaseApp.configure()** at startup
-- **FirebaseAuth** for sign up/sign in/sign out/password flows
-- **Firestore** for users, trips, bookings
-- **District API** endpoints used by `DistrictService`:
-	- `https://bdapis.vercel.app/geo/v2.0/districts`
+## Offer Feature Spotlight
+
+- Dedicated `Offers` tab surfaces discounted buses from Firestore.
+- Query strategy: fetch `busTrips` where `discount > 0`.
+- Ranking strategy:
+	- Higher discount first.
+	- If equal discount, lower discounted fare first.
+- UI clearly shows original fare, discount percentage, and discounted fare.
+- Supports navigation into full trip details directly from offer cards.
+
+## Database Structure (Firestore)
+
+### Collection: users
+
+- id (document id = uid)
+- fullName
+- email
+- phone
+- contactNo
+- address
+- role (`user` or `admin`)
+- role (`user` or `admin` or `operator`)
+- requiresEmailVerification (used for operator/admin style access policy)
+- notificationPreferences:
+	- emailNotifications
+	- pushNotifications
+	- promotionalAlerts
+	- bookingUpdates
+- createdAt
+- updatedAt
+
+### Collection: busTrips
+
+- busName
+- source
+- destination
+- departureTime
+- arrivalTime
+- ticketPrice
+- discount
+- busType
+- availableSeats
+- seatMatrix (40-char binary string)
+- pickupPoints (array)
+- droppingPoints (array)
+- operatorId (nullable)
+- operatorEmail (nullable)
+- operatorName (nullable)
+- createdAt
+- updatedAt
+
+### Collection: bookings
+
+- userId (ref key)
+- busTripId (ref key)
+- seatIndices (array of Int)
+- seatLabels (array of String)
+- totalPrice
+- bookingDate
+- travelDate
+- status (`confirmed` / `cancelled`)
+- operatorId (denormalized for operator analytics)
+- operatorEmail (optional denormalized)
+- operatorName (optional denormalized)
+
+## ER Diagram
+
+```mermaid
+erDiagram
+		USERS ||--o{ BOOKINGS : places
+		USERS ||--o{ BUSTRIPS : operates
+		BUSTRIPS ||--o{ BOOKINGS : has
+
+		USERS {
+				string id PK
+				string fullName
+				string email
+				string role
+				bool requiresEmailVerification
+				string phone
+				string contactNo
+				string address
+				object notificationPreferences
+				date createdAt
+				date updatedAt
+		}
+
+		BUSTRIPS {
+				string id PK
+				string busName
+				string source
+				string destination
+				string departureTime
+				string arrivalTime
+				int ticketPrice
+				int discount
+				string busType
+				int availableSeats
+				string seatMatrix
+				string[] pickupPoints
+				string[] droppingPoints
+				string operatorId FK
+				string operatorEmail
+				string operatorName
+				date createdAt
+				date updatedAt
+		}
+
+		BOOKINGS {
+				string id PK
+				string userId FK
+				string busTripId FK
+				int[] seatIndices
+				string[] seatLabels
+				int totalPrice
+				date bookingDate
+				date travelDate
+				string status
+				string operatorId FK
+				string operatorEmail
+				string operatorName
+		}
+```
+
+## Class Diagram
+
+```mermaid
+classDiagram
+		class UserProfile {
+			+id: String
+			+fullName: String
+			+email: String
+			+role: String
+			+notificationPreferences: NotificationPreferences
+		}
+
+		class NotificationPreferences {
+			+emailNotifications: Bool
+			+pushNotifications: Bool
+			+promotionalAlerts: Bool
+			+bookingUpdates: Bool
+		}
+
+		class BusTrip {
+			+id: String
+			+busName: String
+			+source: String
+			+destination: String
+			+ticketPrice: Int
+			+discount: Int
+			+seatMatrix: String
+			+availableSeats: Int
+			+operatorId: String?
+			+operatorEmail: String?
+			+operatorName: String?
+			+discountedPrice: Int
+		}
+
+		class Booking {
+			+id: String
+			+userId: String
+			+busTrip: BusTrip
+			+seatIndices: [Int]
+			+seatLabels: [String]
+			+totalPrice: Int
+			+status: BookingStatus
+		}
+
+		class BookingConfirmation {
+			+id: String
+			+trip: BusTrip
+			+seatIndices: [Int]
+			+totalPrice: Int
+		}
+
+		class AuthViewModel
+		class BusTripViewModel
+		class BookingViewModel
+		class AdminViewModel
+		class OperatorDashboardView
+		class RouteViewModel
+		class DistrictService
+		class TicketPDFGenerator
+
+		UserProfile --> NotificationPreferences
+		Booking --> BusTrip
+		BookingConfirmation --> BusTrip
+
+		AuthViewModel --> UserProfile
+		BusTripViewModel --> BusTrip
+		BookingViewModel --> Booking
+		BookingViewModel --> BookingConfirmation
+		AdminViewModel --> BusTrip
+		AdminViewModel --> Booking
+		OperatorDashboardView --> AdminViewModel
+		RouteViewModel --> BusTrip
+		DistrictService --> BusTripViewModel
+		TicketPDFGenerator --> BookingConfirmation
+```
+
+## View Flow
+
+```mermaid
+flowchart TD
+		A[ContentView]
+		A --> B[SignInView]
+		B --> C[SignUpView]
+		B --> D[ForgotPasswordView]
+
+		A --> E[MainTabView]
+		E --> F[HomeView]
+		E --> G[OffersView]
+		E --> H[TicketsView]
+		E --> I[ProfileView]
+
+		F --> J[BusListView]
+		J --> K[BusTripDetailView]
+		K --> L[SeatSelectionView]
+		L --> M[BookingConfirmationView]
+
+		A --> N[AdminDashboardView]
+		N --> O[AdminHomeView]
+		N --> P[AddBusView]
+		N --> Q[ManageBusesView]
+		N --> R[SoldTicketsView]
+		N --> S[AdminProfileView]
+
+		A --> T[OperatorDashboardView]
+		T --> U[OperatorHomeView]
+		T --> V[AddBusView]
+		T --> W[ManageBusesView]
+		T --> X[OperatorRevenueView]
+		T --> Y[ProfileView]
+```
+
+## How MVVM (MVVC) Works In This Project
+
+- Model:
+	- Domain entities such as `BusTrip`, `Booking`, `UserProfile`.
+	- Include role flags, operator ownership, decoding, and computed values (discounted price, duration, seat helpers).
+- View:
+	- SwiftUI screens in `Views/` and reusable units in `Components/`.
+	- Bind to observable state from ViewModels.
+- ViewModel:
+	- `AuthViewModel`: auth/session/profile/role decisions.
+	- `BusTripViewModel`: route search and offer retrieval.
+	- `BookingViewModel`: booking create/read/cancel flow.
+	- `AdminViewModel`: admin + operator data operations (CRUD, stats, operator accounts, revenue).
+	- `RouteViewModel`: popular route aggregation.
+
+State travels from ViewModel (`@Published`) to View via bindings and environment injection (`@EnvironmentObject`). User actions in View call ViewModel methods, then updated state redraws UI.
+
+## Application Of State Management
+
+- `@StateObject`: owns long-lived view-scoped ViewModels (Home, Offers, Tickets, etc.).
+- `@EnvironmentObject`: shared auth/session state across app (`AuthViewModel`).
+- `@Published`: exposes reactive mutable properties in all ViewModels.
+- `@State`: local UI state such as selected seats, form text, navigation booleans.
+- `@AppStorage`: persisted appearance preference (`isDarkMode`).
+- `@MainActor`: UI-safe async state mutation in ViewModels.
+
+## Application Of JSON And API
+
+### External API use
+
+- District data is fetched from:
+	- `https://bdapis.vercel.app/geo/v2.0/districts` (primary)
 	- `https://bdapi.vercel.app/api/v.1/district` (fallback)
+- `DistrictService` uses `URLSession` + `JSONDecoder` and maps decoded payload into `District` models.
 
-## 10) Local Configuration and Assets
+### Route search with API call (detailed)
 
-- `GoogleService-Info.plist` contains Firebase project config for the app target
-- `@AppStorage("isDarkMode")` stores appearance preference
-- Assets and icons are in `Assets.xcassets`
-- Entitlements are present in multiple files (main + xml variants)
+- Step 1: `HomeView` loads district data through `DistrictService.fetchDistricts()`.
+- Step 2: `DistrictAutocompleteField` filters API-returned district names for user-friendly route selection.
+- Step 3: user picks `From` and `To` districts from this API-fed list.
+- Step 4: `BusTripViewModel.fetchTrips(from:to:)` queries Firestore for exact `source` and `destination` matches.
+- Step 5: results are sorted by fare client-side and shown in `BusListView`.
 
-## 11) Build, Run, and Test
+This makes route search API-assisted for input accuracy and Firestore-backed for availability and pricing.
+
+### JSON-like Firestore document handling
+
+- Firestore documents are read as `[String: Any]` and converted into typed models via custom initializers.
+- Robust decoding paths handle int/string/number/timestamp variations.
+- Example persisted structures include nested object `notificationPreferences` and array fields like `seatIndices`, `pickupPoints`, `droppingPoints`.
+
+## Booking Data Workflow
+
+- User selects seats from `SeatSelectionView`.
+- Preview shown in `BookingConfirmationView`.
+- `BookingViewModel.bookSeats(...)` performs atomic Firestore batch:
+	- Update `busTrips.seatMatrix` and `availableSeats`.
+	- Insert new booking document in `bookings`.
+- On success, ticket PDF is generated and share/download flow is enabled.
+
+## Project Structure
+
+```text
+BusTicketBooking/
+	BusTicketBookingApp.swift      # App entry + FirebaseApp.configure()
+	ContentView.swift              # Splash + auth/role routing
+	MainTabView.swift              # User tab container
+	Views/OperatorDashboardView.swift   # Operator dashboard and revenue screens
+	Views/CreateOperatorSheet.swift     # Admin flow to create operator accounts
+	Components/                    # Reusable UI parts
+	Models/                        # Domain models + helper structs
+	Utilities/                     # API + PDF utility services
+	ViewModels/                    # Business logic/state orchestrators
+	Views/                         # User/Admin screens
+
+BusTicketBookingTests/           # Unit tests
+BusTicketBookingUITests/         # UI tests
+BusTicketBooking.xcodeproj/      # Xcode project metadata
+```
+
+## Setup
 
 ### Prerequisites
 
-- macOS with Xcode installed
-- Apple developer signing configuration for device deployment
-- Firebase project with Authentication and Firestore enabled
+- macOS + Xcode (latest stable recommended)
+- Apple simulator/device target
+- Firebase project configured for iOS
+- Valid `GoogleService-Info.plist` in app target
 
-### Open project
+### Steps
 
-Use Xcode to open:
+1. Open `BusTicketBooking.xcodeproj` in Xcode.
+2. Select the `BusTicketBooking` scheme.
+3. Ensure Firebase Authentication and Firestore are enabled in Firebase Console.
+4. Build and run on simulator/device.
+5. Create test users and bus trips in Firestore (or use admin tools in app).
 
-- `BusTicketBooking.xcodeproj`
+## Setup Notes For Firestore
 
-### Build and run
+- Collections expected by app: `users`, `busTrips`, `bookings`.
+- Role values expected: `user`, `admin`, `operator`.
+- Missing index scenarios are partially handled by client fallback logic.
+- Ensure Firestore security rules allow required reads/writes per role.
 
-1. Select the `BusTicketBooking` scheme.
-2. Pick simulator/device.
-3. Build: Product -> Build.
-4. Run: Product -> Run.
+## Highlights And Limitations
 
-### Tests
+- Seat layout uses a deterministic 40-seat matrix (`0` available, `1` booked).
+- Admin includes default account bootstrap path (`admin@gmail.com`) plus role-based checks.
+- Operator accounts are created by admin and can sign in without email verification.
+- Payment gateway is not integrated; booking confirmation currently acts as final action.
 
-- Unit tests target: `BusTicketBookingTests`
-- UI tests target: `BusTicketBookingUITests`
+## Project Team
 
-Current non-placeholder unit tests validate bus discount behavior in `BusTrip`.
+Project done by:
 
-## 12) Security and Operational Notes
-
-- Admin detection currently includes hardcoded email logic (`admin@gmail.com`) in auth flow.
-- Email verification is required for normal users; admin path bypasses this.
-- Booking is immediate confirmation (no payment gateway integration).
-- District loading depends on external endpoints; fallback exists.
-- Firestore missing-index scenarios are partially handled in code with fallback querying.
-
-## 13) Known Gaps and Improvement Opportunities
-
-- Replace hardcoded admin email logic with role-only authorization from secure backend rules.
-- Add transaction-level seat locking or conflict-safe booking retries.
-- Integrate payment processing and refund workflow.
-- Expand automated tests for ViewModels, booking flow, and UI journeys.
-- Add edit/update support for existing buses (admin currently has add/delete focus).
-- Wire notification preferences to real push/email delivery pipeline.
-
-## 14) Full Repository Structure
-
-```text
-README.md
-BusTicketBooking/
-	BusTicketBooking.entitlements
-	BusTicketBooking.entitlements.xml
-	BusTicketBooking.entitlements(1).xml
-	BusTicketBookingApp.swift
-	ContentView.swift
-	GoogleService-Info.plist
-	MainTabView.swift
-	Assets.xcassets/
-		Contents.json
-		AccentColor.colorset/
-			Contents.json
-		AppIcon.appiconset/
-			Contents.json
-	Components/
-		BannerView.swift
-		BusCardView.swift
-		DistrictAutocompleteField.swift
-		DistrictPickerView.swift
-		RouteCardView.swift
-		SeatLayoutPDFView.swift
-		ShareSheet.swift
-		Theme.swift
-	Models/
-		Booking.swift
-		BusTrip.swift
-		District.swift
-		Route.swift
-		SeatHelper.swift
-		UserModel.swift
-	Preview Content/
-		Preview Assets.xcassets/
-			Contents.json
-	Utilities/
-		DistrictService.swift
-		TicketPDFGenerator.swift
-	ViewModels/
-		AdminViewModel.swift
-		AuthViewModel.swift
-		BookingViewModel.swift
-		BusTripViewModel.swift
-		RouteViewModel.swift
-		SeedService.swift
-	Views/
-		AddBusView.swift
-		AdminDashboardView.swift
-		AdminProfileView.swift
-		BookingConfirmationView.swift
-		BusListView.swift
-		BusTripDetailView.swift
-		ChangePasswordView.swift
-		ForgotPasswordView.swift
-		HomeView.swift
-		ManageBusesView.swift
-		MoreView.swift
-		NotificationPreferencesView.swift
-		OffersView.swift
-		ProfileView.swift
-		SeatSelectionView.swift
-		SignInView.swift
-		SignUpView.swift
-		SoldTicketsView.swift
-		SplashScreenView.swift
-		TicketsView.swift
-BusTicketBooking.xcodeproj/
-	project.pbxproj
-	project.xcworkspace/
-		contents.xcworkspacedata
-		contents.xcworkspacedata.xml
-		contents.xcworkspacedata(1).xml
-		contents.xcworkspacedata(1)(1).xml
-		xcshareddata/
-			IDEWorkspaceChecks.plist
-			swiftpm/
-				Package.resolved
-		xcuserdata/
-			abir49.xcuserdatad/
-				UserInterfaceState.xcuserstate
-			macos.xcuserdatad/
-				UserInterfaceState.xcuserstate
-	xcuserdata/
-		abir49.xcuserdatad/
-			xcdebugger/
-				Breakpoints_v2.xcbkptlist
-			xcschemes/
-				xcschememanagement.plist
-		macos.xcuserdatad/
-			xcschemes/
-				xcschememanagement.plist
-BusTicketBookingTests/
-	BusTicketBookingTests.swift
-BusTicketBookingUITests/
-	BusTicketBookingUITests.swift
-	BusTicketBookingUITestsLaunchTests.swift
-```
-
-## 15) Complete File-by-File Reference
-
-### Root
-
-- `README.md`: Project documentation.
-
-### `BusTicketBooking/` app module
-
-- `BusTicketBooking.entitlements`: Main entitlements config.
-- `BusTicketBooking.entitlements.xml`: XML-format entitlements variant.
-- `BusTicketBooking.entitlements(1).xml`: Additional entitlements variant/duplicate.
-- `BusTicketBookingApp.swift`: App entry point and Firebase initialization.
-- `ContentView.swift`: Root routing view (splash + auth-based navigation + color scheme).
-- `GoogleService-Info.plist`: Firebase app credentials/config for iOS target.
-- `MainTabView.swift`: Main user tab container (Home/Offers/Tickets/Profile).
-
-### `BusTicketBooking/Assets.xcassets`
-
-- `Assets.xcassets/Contents.json`: Asset catalog root metadata.
-- `Assets.xcassets/AccentColor.colorset/Contents.json`: Accent color metadata.
-- `Assets.xcassets/AppIcon.appiconset/Contents.json`: App icon metadata.
-
-### `BusTicketBooking/Components`
-
-- `Components/BannerView.swift`: Home banner/promo UI component.
-- `Components/BusCardView.swift`: Reusable bus card row with pricing and metadata.
-- `Components/DistrictAutocompleteField.swift`: Text input with district suggestions.
-- `Components/DistrictPickerView.swift`: Picker-style district selector.
-- `Components/RouteCardView.swift`: Route card for popular route section.
-- `Components/SeatLayoutPDFView.swift`: Seat layout visual used for ticket PDF rendering.
-- `Components/ShareSheet.swift`: UIKit share sheet bridge for SwiftUI.
-- `Components/Theme.swift`: Centralized colors and shared style constants.
-
-### `BusTicketBooking/Models`
-
-- `Models/Booking.swift`: Booking domain model + booking confirmation struct.
-- `Models/BusTrip.swift`: Trip model, discount logic, seat matrix normalization, duration helpers.
-- `Models/District.swift`: District and API decoding structures.
-- `Models/Route.swift`: Route summary model (from, to, min price).
-- `Models/SeatHelper.swift`: Seat mapping and matrix mutation/count helpers.
-- `Models/UserModel.swift`: User profile + notification preference model.
-
-### `BusTicketBooking/Preview Content`
-
-- `Preview Content/Preview Assets.xcassets/Contents.json`: SwiftUI preview assets metadata.
-
-### `BusTicketBooking/Utilities`
-
-- `Utilities/DistrictService.swift`: District API fetch service with primary/fallback endpoints.
-- `Utilities/TicketPDFGenerator.swift`: Two-page ticket PDF generation utility.
-
-### `BusTicketBooking/ViewModels`
-
-- `ViewModels/AdminViewModel.swift`: Admin CRUD/statistics/sold-ticket aggregation logic.
-- `ViewModels/AuthViewModel.swift`: Authentication, profile fetch/update, password flows.
-- `ViewModels/BookingViewModel.swift`: Booking creation, query fallback, cancellation.
-- `ViewModels/BusTripViewModel.swift`: Trip search and offers loading.
-- `ViewModels/RouteViewModel.swift`: Popular route derivation from trips.
-- `ViewModels/SeedService.swift`: Reserved/no-op seed service.
-
-### `BusTicketBooking/Views`
-
-- `Views/AddBusView.swift`: Admin form to add buses and route points.
-- `Views/AdminDashboardView.swift`: Admin tab shell + dashboard widgets.
-- `Views/AdminProfileView.swift`: Admin profile and account controls.
-- `Views/BookingConfirmationView.swift`: Booking preview + final commit + PDF actions.
-- `Views/BusListView.swift`: Search results list.
-- `Views/BusTripDetailView.swift`: Detailed trip screen.
-- `Views/ChangePasswordView.swift`: Password change flow for signed-in user.
-- `Views/ForgotPasswordView.swift`: Reset-password request screen.
-- `Views/HomeView.swift`: Search form and popular routes UI.
-- `Views/ManageBusesView.swift`: Admin bus listing and deletion.
-- `Views/MoreView.swift`: Extra/support menu screen.
-- `Views/NotificationPreferencesView.swift`: Notification toggle controls.
-- `Views/OffersView.swift`: Discounted trips screen.
-- `Views/ProfileView.swift`: User profile management and appearance toggle.
-- `Views/SeatSelectionView.swift`: Interactive seat selection interface.
-- `Views/SignInView.swift`: Login screen and verification resend.
-- `Views/SignUpView.swift`: Registration and verification prompt flow.
-- `Views/SoldTicketsView.swift`: Admin sold-ticket visibility screen.
-- `Views/SplashScreenView.swift`: App intro/splash animation.
-- `Views/TicketsView.swift`: User booking history and cancellation actions.
-
-### `BusTicketBooking.xcodeproj`
-
-- `BusTicketBooking.xcodeproj/project.pbxproj`: Xcode project definitions, targets, build settings.
-- `BusTicketBooking.xcodeproj/project.xcworkspace/contents.xcworkspacedata`: Workspace metadata file.
-- `BusTicketBooking.xcodeproj/project.xcworkspace/contents.xcworkspacedata.xml`: Workspace metadata variant.
-- `BusTicketBooking.xcodeproj/project.xcworkspace/contents.xcworkspacedata(1).xml`: Workspace metadata duplicate variant.
-- `BusTicketBooking.xcodeproj/project.xcworkspace/contents.xcworkspacedata(1)(1).xml`: Workspace metadata duplicate variant.
-- `BusTicketBooking.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist`: IDE workspace checks metadata.
-- `BusTicketBooking.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved`: Resolved Swift Package dependencies.
-- `BusTicketBooking.xcodeproj/project.xcworkspace/xcuserdata/abir49.xcuserdatad/UserInterfaceState.xcuserstate`: User-local workspace UI state.
-- `BusTicketBooking.xcodeproj/project.xcworkspace/xcuserdata/macos.xcuserdatad/UserInterfaceState.xcuserstate`: User-local workspace UI state.
-- `BusTicketBooking.xcodeproj/xcuserdata/abir49.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist`: User breakpoint metadata.
-- `BusTicketBooking.xcodeproj/xcuserdata/abir49.xcuserdatad/xcschemes/xcschememanagement.plist`: User-local scheme metadata.
-- `BusTicketBooking.xcodeproj/xcuserdata/macos.xcuserdatad/xcschemes/xcschememanagement.plist`: User-local scheme metadata.
-
-### Tests
-
-- `BusTicketBookingTests/BusTicketBookingTests.swift`: Unit tests (including discount logic assertions).
-- `BusTicketBookingUITests/BusTicketBookingUITests.swift`: Base UI test suite and launch performance test.
-- `BusTicketBookingUITests/BusTicketBookingUITestsLaunchTests.swift`: Launch screenshot test.
-
-## 16) Suggested Contribution Workflow
-
-1. Create a feature branch.
-2. Keep changes scoped by layer (Models/ViewModels/Views).
-3. Add/extend tests when changing business logic.
-4. Verify Firestore field compatibility before shipping.
-5. Open pull request with screenshots for UI changes.
-
-## 17) Current Status Snapshot
-
-- App scaffolding and major functional flows are implemented.
-- Firebase-backed auth and booking persistence are active.
-- PDF ticket generation is integrated.
-- Admin operations are available for bus management and sold-ticket oversight.
-- Automated test coverage exists but is currently minimal and should be expanded.
+- Kazi Rifat Al Muin (Roll: 2107042)
+- Abir Mahmud Talukdar (Roll: 2107049)
+- Abdullah Md. Shahporan (Roll: 2107056)
